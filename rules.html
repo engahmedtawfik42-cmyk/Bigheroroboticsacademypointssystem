@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قوانين ولوائح الأكاديمية - بيج هيرو</title>
+
+<style>
+/* 🎨 الإعدادات العامة والألوان المتناسقة */
+:root {
+    --bg-color: #ffffff;
+    --card-bg: rgba(248, 249, 250, 0.95); 
+    --primary-color: #8b0000; 
+    --accent-color: #ff5722;  
+    --teal-color: #00bfa5;    
+    --text-color: #1a202c;
+    --text-muted: #4a5568;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 🌌 تأثير الخلفية التكنولوجية والإلكترونيات المتحركة الموحد */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(rgba(0, 191, 165, 0.12) 2px, transparent 4px),
+        radial-gradient(rgba(255, 87, 34, 0.10) 1.5px, transparent 3px),
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+    background-size: 100px 100px, 60px 60px, 100% 100%;
+    animation: techBackgroundWalk 40s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes techBackgroundWalk {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-4%, -4%) rotate(360deg); }
+}
+
+.container { 
+    max-width: 900px; 
+    margin: auto; 
+    padding: 15px;
+    min-height: calc(100vh - 350px); 
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+/* 🏆 تصميم الهيدر البروفيشينال */
+.main-header {
+    background-color: #000000;
+    border-bottom: 3px solid var(--primary-color);
+    padding: 20px 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.logo { 
+    width: 80px; 
+    height: auto;
+    border-radius: 12px; 
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.3);
+}
+
+.header-titles h1 { 
+    color: #ffffff; 
+    margin: 0; 
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.header-titles .academy-sub {
+    color: var(--accent-color);
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin-top: 4px;
+}
+
+.made-by {
+    font-size: 12px;
+    color: #e2e8f0;
+    font-style: italic;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-family: 'Comic Sans MS', Tahoma, sans-serif;
+}
+
+/* 🗂️ تصميم بطاقة القوانين */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+.card h2 { 
+    color: #0b0f19; 
+    margin-top: 0;
+    margin-bottom: 20px; 
+    font-size: 18px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* 📜 ستايل قائمة القوانين */
+.rules-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list li {
+    background: #ffffff;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 10px;
+    border-right: 4px solid var(--accent-color);
+    font-size: 15px;
+    line-height: 1.6;
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+}
+
+.rules-list li b {
+    color: #e65100;
+}
+
+/* 🔘 أزرار التحكم والرجوع المريحة للمس */
+.back-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--primary-color);
+    color: white;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    min-height: 44px;
+    width: 100%; /* عرض كامل على الموبايل لسهولة الضغط */
+    box-sizing: border-box;
+}
+
+.back-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* 🏁 تصميم الفوتر الاحترافي */
+.custom-footer {
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 40px;
+    font-family: Arial, sans-serif;
+    direction: ltr; 
+    text-align: left;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 2;
+}
+.footer-top-bar {
+    background-color: var(--primary-color);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.footer-social-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.footer-social-icons a {
+    color: white;
+    text-decoration: none;
+}
+.footer-find-us {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.footer-main-content {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.footer-support h3 {
+    font-size: 20px;
+    margin: 0 0 5px 0;
+    font-weight: normal;
+}
+.footer-support .email-link {
+    color: var(--teal-color);
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.footer-copyright {
+    color: #a0aec0;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.footer-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.footer-logo-img {
+    height: 50px;
+    border-radius: 6px;
+}
+.footer-logo-text {
+    text-align: left;
+}
+.footer-logo-text .brand-big {
+    font-size: 26px;
+    font-weight: 900;
+    display: block;
+}
+.footer-logo-text .brand-sub {
+    font-size: 10px;
+    color: #ffffff;
+    display: block;
+}
+
+/* التجاوب مع الشاشات الأكبر لصفحة القوانين */
+@media (min-width: 576px) {
+    .header-titles h1 { font-size: 32px; }
+    .header-titles .academy-sub { font-size: 14px; }
+    .card h2 { font-size: 24px; }
+    .rules-list li { font-size: 17px; }
+    .back-btn { width: auto; }
+}
+
+@media (max-width: 768px) {
+    .footer-top-bar, .footer-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .footer-logo-section { flex-direction: column; }
+    .footer-logo-text { text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🏆 الهيدر البروفيشينال الموحد للمنصة -->
+<header class="main-header">
+    <div class="header-content">
+        <div class="logo-container">
+            <img src="logo.png" class="logo" alt="Logo">
+            <div class="header-titles">
+                <h1>أكاديمية بيج هيرو</h1>
+                <span class="academy-sub">BIG HERO EGYPTIAN ROBOTICS ACADEMY</span>
+            </div>
+        </div>
+        <div class="made-by">Made by Eagle Coders Studio</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- بطاقة القوانين واللوائح التنظيمية -->
+    <div class="card">
+        <h2>📜 دستور وقوانين أبطال الروبوتات</h2>
+        
+        <ul class="rules-list">
+            <li><b>1. الالتزام بالوقت:</b> الحضور في الموعد المحدد للحصة يضمن لك الحصول على <b>+2 نقطة تميز</b> مباشرة كبطل ملتزم.</li>
+            <li><b>2. التركيز الهندسي:</b> الاستماع الجيد للمهندس المحاضر وعدم مقاطعته أثناء الشرح يرفع من رتبتك التكتيكية داخل الفصل.</li>
+            <li><b>3. الحفاظ على الأدوات:</b> التعامل بحرص واحترافية مع مكونات الروبوتات، والـ Arduino، والمستشعرات المختلفة خط أحمر لكل مهندس.</li>
+            <li><b>4. إنجاز التحديات:</b> حل الأكواد والمهام البرمجية المطلوبة داخل الحصة أو في التحدي المستهدف يمنحك فرصة ربح حتى <b>15 نقطة</b> إضافية.</li>
+            <li><b>5. نظام استبدال الكوينز:</b> كل <b>10 نقاط تميز</b> يتم تجميعها في حسابك، تتحول تلقائياً إلى <b>1 كوين</b> يمكنك الشراء بها من متجر الهدايا.</li>
+            <li><b>6. روح الفريق:</b> التعاون مع زملائك في بناء الشاسيهات وخطوط الإنتاج يعكس القيمة الحقيقية لمهندسي الأكاديمية.</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="index.html" class="back-btn">⬅️ العودة للوحة التحكم الرئيسية</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- 🏁 الفوتر الاحترافي الموحد -->
+<footer class="custom-footer">
+    <div class="footer-top-bar">
+        <div class="footer-social-icons">
+            <a href="#">Facebook</a> | 
+            <a href="#">WhatsApp</a> | 
+            <a href="#">YouTube</a> | 
+            <a href="#">Instagram</a> | 
+            <a href="#">Location</a>
+        </div>
+        <div class="footer-find-us">
+            <span>|</span> Find Us
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-support">
+            <h3>Email our support team</h3>
+            <a href="mailto:info@BigHeroRobotics.com" class="email-link">info@BigHeroRobotics.com</a>
+            <div class="footer-copyright">
+                PrivacyPolicies.com &copy; 2002-2026. All rights reserved.
+            </div>
+        </div>
+        <div class="footer-logo-section">
+            <img src="logo.png" class="footer-logo-img" alt="Big Hero Logo">
+            <div class="footer-logo-text">
+                <span class="brand-big" style="color: #ffffff;">BIG HERO</span>
+                <span class="brand-sub" style="color: #ff5722; font-weight: bold; font-family: sans-serif;">EGYPTIAN Robotics Academy</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

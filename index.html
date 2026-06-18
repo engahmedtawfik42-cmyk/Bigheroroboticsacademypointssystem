@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكاديمية بيج هيرو</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+/* 🎨 الإعدادات العامة والألوان المتناسقة مع الستايل المضيء */
+:root {
+    --bg-color: #ffffff;
+    --card-bg: rgba(248, 249, 250, 0.95); /* بطاقات فاتحة ومريحة للعين */
+    --primary-color: #8b0000; 
+    --accent-color: #ff5722;  
+    --teal-color: #00bfa5;    
+    --text-color: #1a202c;
+    --text-muted: #4a5568;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-tap-highlight-color: transparent; /* إزالة الوميض الأزرق عند اللمس في الموبايل */
+}
+
+/* 🌌 تأثير الخلفية التكنولوجية والإلكترونيات المتحركة على خلفية بيضاء */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* دوائر ومسارات لوحة إلكترونية تكنولوجية دقيقة */
+    background-image: 
+        radial-gradient(rgba(0, 191, 165, 0.12) 2px, transparent 4px),
+        radial-gradient(rgba(255, 87, 34, 0.10) 1.5px, transparent 3px),
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+    background-size: 100px 100px, 60px 60px, 100% 100%;
+    animation: techBackgroundWalk 40s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes techBackgroundWalk {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-4%, -4%) rotate(360deg); }
+}
+
+.container { 
+    max-width: 1100px; 
+    margin: auto; 
+    padding: 15px;
+    min-height: calc(100vh - 300px); 
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+/* 🏆 تصميم الهيدر البروفيشينال المتجاوب */
+.main-header {
+    background-color: #000000;
+    border-bottom: 3px solid var(--primary-color);
+    padding: 20px 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.logo { 
+    width: 80px; 
+    height: auto;
+    border-radius: 12px; 
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.3);
+}
+
+.header-titles h1 { 
+    color: #ffffff; 
+    margin: 0; 
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.header-titles .academy-sub {
+    color: var(--accent-color);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 4px;
+}
+
+.made-by {
+    font-size: 12px;
+    color: #e2e8f0;
+    font-style: italic;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-family: 'Comic Sans MS', Tahoma, sans-serif;
+}
+
+/* 🗂️ تصميم البطاقات البيضاء العصرية */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+.card h2 { 
+    color: #0b0f19; 
+    margin-top: 0;
+    margin-bottom: 15px; 
+    font-size: 18px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* 🕹️ مجموعات الأزرار والتحكم المتجاوبة */
+.actions-flex {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    color: #1a202c;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    border-color: var(--accent-color);
+}
+
+/* 🔘 أزرار تحكم محسنة للموبايل واللمس */
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+}
+
+button:hover { transform: translateY(-1px); opacity: 0.95; }
+button:active { transform: translateY(1px); }
+
+.add-btn { background: #2e7d32; color: white; width: 100%; }
+.delete-btn { background: #c62828; color: white; padding: 8px 12px; font-size: 13px; }
+.plus-btn { background: #1565c0; color: white; padding: 8px 12px; font-size: 13px; min-width: 44px; }
+.minus-btn { background: #ef6c00; color: white; padding: 8px 12px; font-size: 13px; min-width: 44px; }
+.challenge-btn { background: #6a1b9a; color: white; }
+.export-btn { background: #546e7a; color: white; }
+.import-btn { background: #d84315; color: white; }
+.excel-btn { background: #00695c; color: white; }
+.image-btn { background: #283593; color: white; }
+.buy-btn { background: var(--accent-color); color: white; font-weight: bold; width: 100%; justify-content: center; }
+
+/* 👥 تصميم صفوف الطلاب المتجاوبة */
+.student {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.student-info { 
+    text-align: right; 
+    width: 100%;
+}
+.student-info b { font-size: 17px; color: #0b0f19; display: block; margin-bottom: 5px; }
+.student-controls { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 6px; 
+    align-items: center; 
+    justify-content: flex-start;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 10px;
+}
+
+.points { color: #e65100; font-weight: bold; font-size: 14px; margin-top: 4px; }
+.coins { color: #00796b; font-weight: bold; font-size: 14px; margin-top: 2px; }
+.rank { font-weight: bold; margin-top: 6px; font-size: 12px; padding: 2px 8px; border-radius: 6px; display: inline-block; background: #edf2f7; }
+.badges { margin-top: 8px; display: flex; gap: 6px; justify-content: flex-start; flex-wrap: wrap; }
+.badge-icon { background: rgba(0, 150, 136, 0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; color: #00796b; border: 1px solid rgba(0, 150, 136, 0.2); }
+
+/* ألوان الرتب المحدثة متناسقة مع الخلفية البيضاء */
+.rookie{ color: #718096; }
+.distinguished{ color: #2e7d32; }
+.robot-star{ color: #00838f; }
+.lesson-hero{ color: #c2185b; }
+.week-engineer{ color: #6a1b9a; }
+
+#result { font-size: 16px; color: #00796b; font-weight: bold; margin-top: 15px; background: #e6fffa; padding: 12px; border-radius: 8px; border: 1px solid #b2f5ea; text-align: center; }
+
+/* 🏆 لوحة الشرف */
+.leader-item {
+    font-size: 15px; 
+    margin: 10px 0; 
+    background: #ffffff; 
+    padding: 12px; 
+    border-radius: 10px; 
+    border-right: 4px solid var(--accent-color);
+    text-align: right;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    line-height: 1.4;
+}
+
+/* 🛒 متجر الأكاديمية */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+.shop-item {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.shop-item-title { font-weight: bold; font-size: 15px; margin-bottom: 6px; color: #0b0f19; }
+.shop-item-price { color: #e65100; font-weight: bold; margin-bottom: 12px; font-size: 14px; }
+
+/* 🏁 تصميم الفوتر الاحترافي */
+.custom-footer {
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 40px;
+    font-family: Arial, sans-serif;
+    direction: ltr; 
+    text-align: left;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 2;
+}
+.footer-top-bar {
+    background-color: var(--primary-color);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.footer-social-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.footer-social-icons a {
+    color: white;
+    text-decoration: none;
+}
+.footer-find-us {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.footer-main-content {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.footer-support h3 {
+    font-size: 20px;
+    margin: 0 0 5px 0;
+    font-weight: normal;
+}
+.footer-support .email-link {
+    color: var(--teal-color);
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.footer-copyright {
+    color: #a0aec0;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.footer-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.footer-logo-img {
+    height: 50px;
+    border-radius: 6px;
+}
+.footer-logo-text {
+    text-align: left;
+}
+.footer-logo-text .brand-big {
+    font-size: 26px;
+    font-weight: 900;
+    display: block;
+}
+.footer-logo-text .brand-sub {
+    font-size: 10px;
+    color: #ffffff;
+    display: block;
+}
+
+/* 🖥️ تكييف العرض التلقائي للشاشات الأكبر */
+@media (min-width: 576px) {
+    .input-group { flex-direction: row; }
+    input { width: auto; flex-grow: 1; }
+    .add-btn { width: auto; }
+    .student { flex-direction: row; justify-content: space-between; align-items: center; }
+    .student-info { width: auto; min-width: 180px; }
+    .student-controls { border-top: none; padding-top: 0; }
+    .header-titles h1 { font-size: 32px; }
+    .header-titles .academy-sub { font-size: 14px; }
+    .card h2 { font-size: 22px; }
+}
+
+@media (max-width: 768px) {
+    .footer-top-bar, .footer-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .footer-logo-section { flex-direction: column; }
+    .footer-logo-text { text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="header-content">
+        <div class="logo-container">
+            <img src="logo.png" class="logo" alt="Logo">
+            <div class="header-titles">
+                <h1>أكاديمية بيج هيرو</h1>
+                <span class="academy-sub">BIG HERO EGYPTIAN ROBOTICS ACADEMY</span>
+            </div>
+        </div>
+        <div class="made-by">Made by Eagle Coders Studio</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🛠️ إدارة المنظومة وإضافة الأبطال</h2>
+        <div class="input-group">
+            <input id="name" placeholder="اسم البطل الجديد...">
+            <button class="add-btn" onclick="addStudent()">➕ إضافة بطل</button>
+        </div>
+        <div class="actions-flex">
+            <button class="export-btn" style="background:#0277bd;" onclick="exportJSON()">📤 تصدير JSON</button>
+            <button class="excel-btn" onclick="exportExcel()">📊 تقرير Excel</button>
+            <button class="challenge-btn" onclick="spinRandom()">🎲 تحدي عشوائي</button>
+            <button class="import-btn" onclick="document.getElementById('file').click()">📥 استيراد بيانات</button>
+            <input type="file" id="file" hidden onchange="importData(event)">
+            <button class="image-btn" onclick="exportImage()">🖼️ استخراج اللوحة كصورة</button>
+            <a href="rules.html" style="text-decoration:none;"><button class="export-btn">📜 اللوائح والقوانين</button></a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👑 لوحة الشرف (أعلى 3 أبطال)</h2>
+        <div id="leaders"></div>
+    </div>
+
+    <div class="card">
+        <h2>🛒 متجر المكافآت التفاعلي</h2>
+        <div style="margin-bottom: 15px; text-align: right;">
+            <label for="buyer-select" style="font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 5px;">اختر الطالب المشتري: </label>
+            <select id="buyer-select"></select>
+        </div>
+        <div class="shop-grid">
+            <div class="shop-item">
+                <div class="shop-item-title">🎁 قلم ليزر مضيء</div>
+                <div class="shop-item-price">🪙 2 كوين</div>
+                <button class="buy-btn" onclick="buyItem('قلم ليزر مضيء', 2)">شراء 🛒</button>
+            </div>
+            <div class="shop-item">
+                <div class="shop-item-title">🧩 مكعب روبيك ذكي</div>
+                <div class="shop-item-price">🪙 5 كوين</div>
+                <button class="buy-btn" onclick="buyItem('مكعب روبيك ذكي', 5)">شراء 🛒</button>
+            </div>
+            <div class="shop-item">
+                <div class="shop-item-title">🏎️ سيارة روبوت صغيرة</div>
+                <div class="shop-item-price">🪙 10 كوين</div>
+                <button class="buy-btn" onclick="buyItem('سيارة روبوت صغيرة', 10)">شراء 🛒</button>
+            </div>
+            <div class="shop-item">
+                <div class="shop-item-title">🎖️ وسام بطل الأسبوع</div>
+                <div class="shop-item-price">🪙 15 كوين</div>
+                <button class="buy-btn" onclick="buyItem('وسام بطل الأسبوع الذهبي', 15)">شراء 🛒</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 سحب التحدي المستهدف لأبطال الهندسة</h2>
+        <div class="input-group">
+            <select id="select"></select>
+            <button class="challenge-btn" onclick="spinTargeted()" style="background: var(--accent-color); width: 100%;">🔥 إطلاق عجلة الحظ</button>
+        </div>
+        <p id="result">اختر بطلاً مستهدفاً لبدء المغامرة الفورية...</p>
+    </div>
+
+    <div class="card">
+        <h2>📋 الرصد العام وقائمة الأبطال الفعالة</h2>
+        <div id="list"></div>
+    </div>
+
+</div>
+
+<footer class="custom-footer">
+    <div class="footer-top-bar">
+        <div class="footer-social-icons">
+            <a href="#">Facebook</a> | 
+            <a href="#">WhatsApp</a> | 
+            <a href="#">YouTube</a> | 
+            <a href="#">Instagram</a> | 
+            <a href="#">Location</a>
+        </div>
+        <div class="footer-find-us">
+            <span>|</span> Find Us
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-support">
+            <h3>Email our support team</h3>
+            <a href="mailto:info@BigHeroRobotics.com" class="email-link">info@BigHeroRobotics.com</a>
+            <div class="footer-copyright">
+                PrivacyPolicies.com &copy; 2002-2026. All rights reserved.
+            </div>
+        </div>
+        <div class="footer-logo-section">
+            <img src="logo.png" class="footer-logo-img" alt="Big Hero Logo">
+            <div class="footer-logo-text">
+                <span class="brand-big" style="color: #ffffff;">BIG HERO</span>
+                <span class="brand-sub" style="color: #ff5722; font-weight: bold; font-family: sans-serif;">EGYPTIAN Robotics Academy</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+let students = JSON.parse(localStorage.getItem("heroes")) || [];
+
+const soundPlus = new Audio('https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav');
+const soundMinus = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav');
+const soundSuccess = new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-84.wav');
+
+function save(){
+    localStorage.setItem("heroes", JSON.stringify(students));
+}
+
+function getRank(points){
+    if(points >= 30) return {name:"🛠️ مهندس الأسبوع", cls:"week-engineer"};
+    if(points >= 25) return {name:"🥇 بطل الحصة", cls:"lesson-hero"};
+    if(points >= 20) return {name:"🌟 نجم الروبوتات", cls:"robot-star"};
+    if(points >= 15) return {name:"🟢 مهندس متميز", cls:"distinguished"};
+    return {name:"🪨 مبتدئ", cls:"rookie"};
+}
+
+function getBadges(coins) {
+    let badges = [];
+    if(coins >= 1) badges.push("🪙 بداية قوية");
+    if(coins >= 3) badges.push("⚡ طاقة خارقة");
+    if(coins >= 6) badges.push("👑 أسطوري");
+    return badges;
+}
+
+function addStudent(){
+    let name = document.getElementById("name").value.trim();
+    if(!name){
+        alert("الرجاء كتابة اسم البطل أولاً!");
+        return;
+    }
+    students.push({
+        id: Date.now(),
+        name: name,
+        points: 0,
+        spentCoins: 0 
+    });
+    save();
+    render();
+    document.getElementById("name").value = "";
+}
+
+function addPoints(id, val){
+    students.forEach(s => {
+        if(s.id === id){
+            s.points += val;
+            if(s.points < 0) s.points = 0; 
+            if(s.spentCoins === undefined) s.spentCoins = 0;
+        }
+    });
+    
+    if(val > 0) {
+        soundPlus.play().catch(e => console.log("الصوت يعمل بعد التفاعل للعميل"));
+    } else {
+        soundMinus.play().catch(e => console.log("الصوت يعمل بعد التفاعل للعميل"));
+    }
+
+    save();
+    render();
+}
+
+function deleteStudent(id){
+    if(confirm("هل أنت متأكد من حذف هذا البطل نهائياً؟")){
+        students = students.filter(s => s.id !== id);
+        save();
+        render();
+    }
+}
+
+function buyItem(itemName, itemPrice) {
+    if(students.length === 0){
+        alert("لا يوجد طلاب مسجلون حالياً.");
+        return;
+    }
+    
+    let buyerId = parseInt(document.getElementById("buyer-select").value);
+    let student = students.find(s => s.id === buyerId);
+    
+    if(!student) {
+        alert("الرجاء اختيار الطالب المشتري أولاً.");
+        return;
+    }
+    
+    let totalCoinsEarned = Math.floor(student.points / 10);
+    if(student.spentCoins === undefined) student.spentCoins = 0;
+    let availableCoins = totalCoinsEarned - student.spentCoins;
+    
+    if(availableCoins < itemPrice) {
+        alert(`عفواً، الرصيد غير كافٍ! تتطلب ${itemPrice} كوين، ورصيدك هو ${availableCoins} كوين.`);
+        return;
+    }
+    
+    student.spentCoins += itemPrice;
+    soundSuccess.play().catch(e => console.log("الصوت مدعوم بتفاعل"));
+    alert(`تهانينا للبطل ${student.name}! تم شراء [${itemName}] بنجاح.`);
+    
+    save();
+    render();
+}
+
+function spinRandom() {
+    if(students.length === 0){
+        alert("يرجى إضافة طلاب أولاً.");
+        return;
+    }
+    let randomStudent = students[Math.floor(Math.random() * students.length)];
+    executeChallenge(randomStudent.id);
+}
+
+function spinTargeted() {
+    if(students.length === 0){
+        alert("يرجى إضافة طلاب أولاً.");
+        return;
+    }
+    let id = parseInt(document.getElementById("select").value);
+    executeChallenge(id);
+}
+
+function executeChallenge(studentId) {
+    document.getElementById("result").innerHTML = "⚡ جاري حساب مكافأة التحدي الهندسي العشوائي...";
+    
+    setTimeout(() => {
+        let prizes = [1, 2, 5, 10, 15, 0];
+        let prize = prizes[Math.floor(Math.random() * prizes.length)];
+        
+        students.forEach(s => {
+            if(s.id === studentId) {
+                s.points += prize;
+            }
+        });
+        
+        if(prize > 0) {
+            soundPlus.play().catch(e => console.log("تفاعل صوتي"));
+        }
+        
+        save();
+        render();
+        
+        let winner = students.find(s => s.id === studentId);
+        if(prize > 0) {
+            document.getElementById("result").innerHTML = `🎉 رائع! البطل ${winner.name} حصل على +${prize} نقاط تميز!`;
+        } else {
+            document.getElementById("result").innerHTML = `حظاً أوفر بالتحدي القادم للمهندس المتميز ${winner.name}!`;
+        }
+    }, 1200);
+}
+
+function exportJSON(){
+    if(students.length === 0){
+        alert("لا توجد بيانات لتصديرها.");
+        return;
+    }
+    let blob = new Blob([JSON.stringify(students, null, 2)], {type: "application/json"});
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "academy_heroes.json";
+    a.click();
+}
+
+function exportExcel(){
+    if(students.length === 0){
+        alert("القائمة فارغة تماماً.");
+        return;
+    }
+    
+    students.sort((a, b) => b.points - a.points);
+    let data = students.map((s, index) => {
+        let totalCoins = Math.floor(s.points / 10);
+        let currentCoins = totalCoins - (s.spentCoins || 0);
+        if(currentCoins < 0) currentCoins = 0;
+        
+        return {
+            "الترتيب": index + 1,
+            "اسم المهندس البطل": s.name,
+            "إجمالي النقاط": s.points,
+            "الكوينز المتاحة": currentCoins,
+            "المستوى": getRank(s.points).name
+        };
+    });
+    
+    let ws = XLSX.utils.json_to_sheet(data);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "الأبطال");
+    XLSX.writeFile(wb, "Big_Hero_Academy_Report.xlsx");
+}
+
+function exportImage(){
+    if(students.length === 0){
+        alert("القائمة فارغة تماماً.");
+        return;
+    }
+    html2canvas(document.getElementById("list")).then(canvas => {
+        let a = document.createElement("a");
+        a.download = "heroes_ranking.png";
+        a.href = canvas.toDataURL();
+        a.click();
+    });
+}
+
+function importData(e){
+    let file = e.target.files[0];
+    if(!file) return;
+    let reader = new FileReader();
+    reader.onload = function(){
+        try{
+            students = JSON.parse(reader.result);
+            students.forEach(s => { if(s.spentCoins === undefined) s.spentCoins = 0; });
+            save();
+            render();
+            alert("تم استيراد وتحديث قاعدة البيانات بنجاح.");
+        }catch{
+            alert("الملف المرفوع غير صالح.");
+        }
+    };
+    reader.readAsText(file);
+}
+
+function render(){
+    if(students.length === 0){
+        document.getElementById("list").innerHTML = "<div style='color:var(--text-muted); text-align:center;'>لا يوجد مهندسون مسجلون حالياً بالمنظومة...</div>";
+        document.getElementById("select").innerHTML = "<option>لا يوجد أبطال متاحون</option>";
+        document.getElementById("buyer-select").innerHTML = "<option>لا يوجد أبطال متاحون</option>";
+        document.getElementById("leaders").innerHTML = "<div style='color:var(--text-muted); text-align:center;'>قائمة الصدارة بانتظار تجميع النقاط الأولى...</div>";
+        return;
+    }
+
+    students.sort((a, b) => b.points - a.points);
+
+    document.getElementById("list").innerHTML = students.map(s => {
+        let r = getRank(s.points);
+        let totalCoinsEarned = Math.floor(s.points / 10);
+        let currentAvailableCoins = totalCoinsEarned - (s.spentCoins || 0);
+        if(currentAvailableCoins < 0) currentAvailableCoins = 0;
+
+        let bList = getBadges(currentAvailableCoins);
+        let badgesHTML = bList.map(b => `<span class="badge-icon">${b}</span>`).join(" ");
+        
+        return `
+        <div class="student">
+            <div class="student-info">
+                <b>👤 ${s.name}</b>
+                <div class="points">⭐ ${s.points} نقطة تميز</div>
+                <div class="coins">🪙 ${currentAvailableCoins} كوين متاح للمتجر</div>
+                <div class="rank ${r.cls}">${r.name}</div>
+                <div class="badges">${badgesHTML ? badgesHTML : '<span style="font-size:12px; color:var(--text-muted);">لا توجد أوسمة حالية</span>'}</div>
+            </div>
+            <div class="student-controls">
+                <button class="plus-btn" onclick="addPoints(${s.id},1)">+1</button>
+                <button class="plus-btn" onclick="addPoints(${s.id},5)">+5</button>
+                <button class="plus-btn" onclick="addPoints(${s.id},10)">+10</button>
+                <button class="minus-btn" onclick="addPoints(${s.id},-1)">-1</button>
+                <button class="minus-btn" onclick="addPoints(${s.id},-5)">-5</button>
+                <button class="delete-btn" onclick="deleteStudent(${s.id})">🗑️ حذف</button>
+            </div>
+        </div>`;
+    }).join("");
+
+    document.getElementById("leaders").innerHTML = students.slice(0, 3).map((s, i) => {
+        let medals = ["🥇", "🥈", "🥉"];
+        return `<div class="leader-item">${medals[i]} المركز ${i+1}: <b>${s.name}</b> برصيد ⭐ <span style="color:#e65100;">${s.points}</span> نقطة.</div>`;
+    }).join("");
+
+    let optionsHTML = students.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+    document.getElementById("select").innerHTML = optionsHTML;
+    document.getElementById("buyer-select").innerHTML = optionsHTML;
+}
+
+render();
+</script>
+
+</body>
+</html>
